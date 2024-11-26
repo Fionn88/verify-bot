@@ -2,7 +2,7 @@
 
 ### Getting Started and Documentation
 
-For installation, see the [install](https://github.com/Fionn88/verify-bot/blob/dev/docs/install.md) guide.
+For installation, see the [install](https://github.com/Fionn88/verify-bot/blob/main/docs/install.md) guide.
 
 ### Report a Bug
 
