@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import logging
+import data
 
 intents = discord.Intents.default()
 intents.members = True
@@ -10,7 +11,6 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 
 # 更新 SQL 的 discord_id 或拒絕重複使用的用戶
 def update_status(member_data):
-    # members = read_csv()
     updated = False
 
     # 檢查成員是否已經存在，並更新 discord_id
@@ -20,9 +20,9 @@ def update_status(member_data):
         return "error"
     # 有資料的話
     elif result:
-        stored_email, stored_name, stored_discordId = result
+        stored_name, stored_email, stored_discordId = result
         if stored_email == member_data['email'] and stored_name == member_data['name']:
-            if not member['discord_id']:
+            if not stored_discordId:
                 updated = True
             else:
                 if stored_discordId == member_data['discord_id']:
