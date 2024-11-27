@@ -25,16 +25,18 @@ def search_user(member_data):
 
 def update_user(member_data):
     try:
+        conn = pymysql.connect(**db_settings)
         cursor = conn.cursor()
         update_query = "UPDATE "+config.DB_TABLE+" SET discord_id = %s WHERE email = %s"
         cursor.execute(update_query, (member_data['discord_id'], member_data['email']))
         if cursor.rowcount > 0:
+            conn.commit()
             logging.info(f"Successfully updated the discord_id for {member_data['email']} to {member_data['discord_id']}.")
             return True
         else:
             logging.error(f"No records found for email: {member_data['email']}. No update was made.")
             return False
-    except:
+    except Exception as e:
         logging.error(e)
         conn.rollback()
         return 'error'
